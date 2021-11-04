@@ -1,0 +1,26 @@
+# Note: {var} signifies a template variable whose name is var
+# Template Variables are used both for generating values based on templates,
+# and also, in the case of file-formats, for extracting template values from given values
+
+# TODO - C/C++ are currently Windows-specific (exe), make it general
+# Commands used to compile / interpret
+#   {temp} is temporary folder location
+#   {name} is input filename (without extension)
+languages:
+  c++:
+    requirements: ['g++']
+    compile: 'g++ -std=c++17 {name}.cpp -o {temp}/{name}.exe'
+    execute: '{temp}/{name}.exe'
+  python:
+    requirements: ['python']
+    compile: ''                             # No compilation step, since Python is interpreted
+    execute: 'python {name}.py'
+  java:
+    requirements: ['javac', 'java']
+    compile: 'javac -d {temp} {name}.java'
+    execute: 'java -cp {temp} {name}'
+
+# File Naming Specification (excluding file extension)
+code_file_format:
+  order: ['course', 'roll', 'name']
+  sep: '-'
